@@ -44,7 +44,7 @@ class IcalError(Exception):
 
 
 class Convertor():
-    RECUR_TAG = ":RECURRING:"
+    RECUR_TAG = ":⥁:"
 
     # Do not change anything below
 
@@ -67,6 +67,9 @@ class Convertor():
         except ValueError as e:
             msg = "Parsing error: {}".format(e)
             raise IcalError(msg)
+
+        # rja, 2023-03-22, have nicer name in agenda view
+        org_file.write(u"#+CATEGORY: cal\n")
 
         now = datetime.now(utc)
         start = now - timedelta(days=self.days)
